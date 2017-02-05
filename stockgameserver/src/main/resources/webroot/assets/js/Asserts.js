@@ -35,6 +35,8 @@ Tests.defaultOutput = function(testName,failed,results){
  *      if none is provide then the default is used, or the one set by Tests.setOutputCallback(function());
  * */
 Tests.run = function (outputFunction){
+    console.group("TestRun");
+
     while(Tests.testList.length != 0){
         // test setup
         Tests.currentTest = [];
@@ -48,6 +50,7 @@ Tests.run = function (outputFunction){
         var chosenOutput = outputFunction || Tests.outputCallback || Tests.defaultOutput;
         chosenOutput(test.name,Tests.currentTest.isFailed,Tests.currentTest.results);
     }
+    console.groupEnd();
 };
 
 Tests.setOutputFunction = function(func){
