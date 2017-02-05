@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test page</title>
+    <script src="assets/js/Asserts.js"></script>
+    <script src="assets/js/Shiftbuffer.js"></script>
+</head>
+<body>
+<p>ShiftBuffer tests: </p>
+<p id="TestResults"></p>
+<script>
+    // change output to html page & logging
+    Tests.setOutputFunction(function(testName,failed,results){
+        var resultDiv = document.createElement('p');
+        var message;
+        if(failed){
+            message ="Test with name: "+testName+" failed";
+            resultDiv.setAttribute('style',"color:#FF0000");
+            var result = document.createElement('div');
+            result.setAttribute('style',"color:#FF0000");
+            result.innerHTML = message;
+            console.groupCollapsed(message);
+            resultDiv.appendChild(result);
+            results.forEach(
+                    function(res){
+                        var resDiv = document.createElement('div');
+                        console.warn(res);
+                        resDiv.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;"+ res;
+                        resultDiv.appendChild(resDiv);
+                    }
+            );
+            console.groupEnd(message);
+        } else {
+            message = "Test with name: " + testName + " Succeeded";
+            resultDiv.setAttribute('style',"color:#00FF00");
+            console.info(message);
+            resultDiv.innerHTML = message;
+        }
+        document.getElementById("TestResults").appendChild(resultDiv);
+    });
+    // and run
+    Tests.run();
+</script>
+
+</body>
+</html>
